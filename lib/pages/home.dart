@@ -4,7 +4,9 @@ import 'package:user_management/pages/profile.dart';
 /// Page d'accueil
 class MyHomePage extends StatefulWidget {
   /// Constructeur de la d'accueil
-  const MyHomePage({super.key});
+  const MyHomePage({required this.email, super.key});
+  /// email pour donner au component sign out firebase
+  final String email;
 
   /// Titre de la page
   final String title = 'User Management';
@@ -21,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             onPressed: () async {
-              await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=> const MyProfilePage()));
+              await Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context)=> MyProfilePage(email: widget.email,)));
             },
             icon: const Icon(Icons.person),
             iconSize: 30,
