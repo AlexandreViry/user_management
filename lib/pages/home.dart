@@ -19,21 +19,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
             onPressed: () async {
               await Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context)=> MyProfilePage(email: widget.email,)));
             },
-            icon: const Icon(Icons.person),
+            icon: Icon(
+              Icons.person,
+              color: Theme.of(context).colorScheme.secondary,
+          ),
             iconSize: 30,
           ),
         ],
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Text(
+          widget.title,
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
+          style: TextStyle(
+            color: Theme.of(context).colorScheme.primary, 
+          ),
           'USER_MANAGEMENT',
         ),
       ),
