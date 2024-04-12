@@ -1,6 +1,6 @@
 <h1 align="center"> 👥 User Management 📱 </h1> <br>
 <p align="center">
-    <img alt="mockup" title="mockup" src="./src/assets/readme/mockuper.png" width="450">
+    <img alt="login" title="mockup" src="./doc/ReadMe/login_mockup.gif" width="300">
 </p>
 
 <p align="center">
@@ -57,7 +57,7 @@ L'utilisation de capacités natives du téléphone et du navigateur web telles q
 Cette application vise non seulement à satisfaire les exigences techniques du projet mais aussi à offrir une expérience utilisateur agréable et fonctionnelle.
 
 
-## 🏗️🈵 Architecture et technos
+## 🏗️ Architecture et technos
 </br>
 <div align="center">
   <img alt="Flutter" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
@@ -67,21 +67,15 @@ Cette application vise non seulement à satisfaire les exigences techniques du p
 
 
 ## 🖥️ Notre solution
-
-<img alt="mockup" title="mockup" src="./src/assets/readme/" width="1050">
-
----
-
-<img alt="mockup" title="mockup" src="./src/assets/readme/" width="1050">
-
----
-
-<img alt="mockup" title="mockup" src="./src/assets/readme/" width="1050">
-
----
-
-<img alt="mockup" title="mockup" src="./src/assets/readme/" width="1050">
-
+<p align="center">
+    <img alt="login" title="mockup" src="./doc/ReadMe/login_mockup.gif" width="300">
+    ---
+    <img alt="register" title="mockup" src="./doc/ReadMe/register_mockup.gif" width="300">
+    ---
+    <img alt="google sign in" title="mockup" src="./doc/ReadMe/google_login_mockup.gif" width="300">
+    ---
+    <img alt="navbar" title="mockup" src="./doc/ReadMe/navbar_mockup.gif" width="300">
+</p>
 
 ## 📉📈 Déployer localement
 
