@@ -8,7 +8,7 @@ import 'package:user_management/pages/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final ThemeController themeController = Get.put(ThemeController());
+  Get.put(ThemeController());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((FirebaseApp value) => Get.put(AuthController()));

@@ -1,9 +1,9 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import 'package:user_management/pages/home.dart';
 import 'package:user_management/pages/login.dart';
 
@@ -14,7 +14,7 @@ class AuthController extends GetxController{
   late Rx<User?> _user;
   /// assingnation de l'instance
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   void onReady() {
     super.onReady();
@@ -34,7 +34,17 @@ class AuthController extends GetxController{
   /// création de compte firebase
   Future<void> register(String email, String password) async {
     try {
-      await auth.createUserWithEmailAndPassword(email: email, password: password);
+      final UserCredential userCredential = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      final User? user = userCredential.user;
+
+      // Enregistrer les détails de l'utilisateur dans Firestore
+      // ignore: always_specify_types
+      await _firestore.collection('users').add({
+        'uid': user?.uid,
+        'email': user?.email,
+        'isAdmin': 1,
+      });
+      
     } catch(e) {
       Get.snackbar('About User',  'User message',
       backgroundColor: Colors.redAccent,
