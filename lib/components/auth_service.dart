@@ -37,10 +37,8 @@ class AuthController extends GetxController{
       final UserCredential userCredential = await auth.createUserWithEmailAndPassword(email: email, password: password);
       final User? user = userCredential.user;
 
-      // Enregistrer les détails de l'utilisateur dans Firestore
       // ignore: always_specify_types
-      await _firestore.collection('users').add({
-        'uid': user?.uid,
+      await _firestore.collection('users').doc(user?.uid).set({
         'email': user?.email,
         'isAdmin': 1,
       });
