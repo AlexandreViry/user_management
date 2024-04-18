@@ -5,7 +5,6 @@ import 'package:user_management/components/auth_service.dart';
 import 'package:user_management/components/get_x_theme_controller.dart';
 import 'package:user_management/firebase_options.dart';
 import 'package:user_management/pages/splash.dart';
-import 'package:user_management/pages/splash_screen.dart';
 
 
 Future<void> main() async {
