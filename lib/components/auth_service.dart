@@ -16,20 +16,26 @@ class AuthController extends GetxController {
   /// assingnation de l'instance
   FirebaseAuth auth = FirebaseAuth.instance;
 
-    @override
+  @override
   void onInit() {
     super.onInit();
-    _showSplashScreen();
+    _showInitialSplashScreen();
   }
 
-  Future<void> _showSplashScreen() async {
-    await Get.off(() => SplashScreen(), transition: Transition.fadeIn);
-
+  // Affichage du splashScreen avant de d'afficher la page de connexion
+  void _showInitialSplashScreen() {
     Future.delayed(const Duration(seconds: 2), () {
-      _user = Rx<User?>(auth.currentUser);
-      _user.bindStream(auth.userChanges());
-      ever(_user, _initialScreens);
+      Get.off(() => SplashScreen());
+      Future.delayed(const Duration(seconds: 2), () {
+        _checkUserLoggedIn();
+      });
     });
+  }
+
+  void _checkUserLoggedIn() {
+    _user = Rx<User?>(auth.currentUser);
+    _user.bindStream(auth.userChanges());
+    ever(_user, _initialScreens);
   }
 
   Future<void> _initialScreens(User? user) async {
