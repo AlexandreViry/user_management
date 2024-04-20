@@ -6,7 +6,6 @@ import 'package:user_management/components/get_x_theme_controller.dart';
 import 'package:user_management/firebase_options.dart';
 import 'package:user_management/pages/splash.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final ThemeController themeController = Get.put(ThemeController());
