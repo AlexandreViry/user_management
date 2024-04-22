@@ -11,6 +11,7 @@ class AppInitializer extends StatelessWidget {
   Widget build(BuildContext context)  {
     return FutureBuilder<FirebaseApp>(
       /// Initialisation de Firebase
+      // ignore: discarded_futures
       future: Firebase.initializeApp(),
       builder: (BuildContext context, AsyncSnapshot<FirebaseApp> snapshot) {
         // Vérifier les états de la connexion
