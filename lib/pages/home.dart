@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:user_management/components/admin_button.dart';
+import 'package:user_management/components/user_status.dart';
 import 'package:user_management/pages/profile.dart';
 
 /// Page d'accueil
 class MyHomePage extends StatefulWidget {
   /// Constructeur de la d'accueil
   const MyHomePage({required this.email, super.key});
+
   /// email pour donner au component sign out firebase
   final String email;
 
@@ -16,6 +20,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +29,17 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             onPressed: () async {
-              await Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context)=> MyProfilePage(email: widget.email,)));
+              await Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                      builder: (BuildContext context) => MyProfilePage(
+                            email: widget.email,
+                          )));
             },
             icon: Icon(
               Icons.person,
               color: Theme.of(context).colorScheme.secondary,
-          ),
+            ),
             iconSize: 30,
           ),
         ],
@@ -42,11 +52,17 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
-        child: Text(
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary, 
-          ),
-          'USER_MANAGEMENT',
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'USER_MANAGEMENT',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+              AdminButton()
+          ],
         ),
       ),
     );
