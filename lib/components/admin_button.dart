@@ -31,11 +31,7 @@ class _AdminButtonState extends State<AdminButton> {
     return ElevatedButton(
       onPressed: _isAdmin
           ? () {
-              NotificationService notificationService = NotificationService();
-              notificationService.showNotification(
-                id: 0,
-                title: 'Titre de la notification',
-              );
+            NotificationService.pushNotification(title: 'Admin button', body: 'You are an admin, this is why you are special and can press this button');
             }
           : null,
       child: Text('Admin only'),
