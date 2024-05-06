@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_management/components/admin_button.dart';
-import 'package:user_management/components/user_status.dart';
 import 'package:user_management/pages/profile.dart';
 
 /// Page d'accueil
 class MyHomePage extends StatefulWidget {
   /// Constructeur de la d'accueil
   const MyHomePage({required this.email, super.key});
-
   /// email pour donner au component sign out firebase
   final String email;
 
