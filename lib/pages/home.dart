@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: <Widget>[
           IconButton(
             onPressed: () async {
-              await Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context)=> MyProfilePage(email: widget.email,)));
+              await Navigator.push(context, MaterialPageRoute<void>(builder: (BuildContext context)=> MyProfilePage(email: widget.email, status: 'admin')));
             },
             icon: Icon(
               Icons.person,
