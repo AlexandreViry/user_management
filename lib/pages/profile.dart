@@ -1,21 +1,20 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:user_management/components/sign_out_button.dart';
+import 'package:user_management/components/profile_actions.dart';
+import 'package:user_management/components/profile_info.dart';
+import 'package:user_management/components/profile_picture.dart';
 import 'package:user_management/components/theme_switching.dart';
 
-/// Page de profil
+/// Page de profil principale
 class MyProfilePage extends StatefulWidget {
-  /// Constructeur de la page de profil
-  const MyProfilePage({required this.email, required this.status, super.key});
+  const MyProfilePage({required this.email, super.key});
 
   /// Email de l'utilisateur
   final String email;
-
-  /// Statut de l'utilisateur (admin ou user)
-  final String status;
 
   /// Titre de la page
   final String title = 'Page Profil';
@@ -25,42 +24,79 @@ class MyProfilePage extends StatefulWidget {
 }
 
 class _MyProfilePageState extends State<MyProfilePage> {
-  XFile? _profileImage;
-  final ImagePicker _picker = ImagePicker();
-  String pictureUrl = '';
+  String? pictureUrl;
+  bool _isAdmin = false;
 
-  Future<void> updateProfileImageUrl(String userId, String newImageUrl) async {
-    try {
-      DocumentReference userDoc =
-          FirebaseFirestore.instance.collection('users').doc(userId);
+  /// Récupération du user
+  User? user = FirebaseAuth.instance.currentUser;
 
-      await userDoc.update({
-        'imageUrl': newImageUrl,
+  @override
+  void initState() {
+    super.initState();
+    _checkAdminStatus();
+    _fetchProfileImageUrl();
+  }
+
+  /// Vérifie le statut administrateur
+  Future<void> _checkAdminStatus() async {
+    if (user == null) return;
+
+    var userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get();
+    setState(() {
+      _isAdmin = userDoc.exists && (userDoc.data()?['isAdmin'] == true);
+    });
+  }
+
+  /// Récupère l'URL de l'image de profil depuis Firestore
+  Future<void> _fetchProfileImageUrl() async {
+    if (user == null) return;
+
+    var userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get();
+    if (userDoc.exists) {
+      setState(() {
+        pictureUrl = userDoc.data()?['imageUrl'] as String?;
       });
-
-      print('Picture URL updated');
-    } catch (e) {
-      print('Error: $e');
     }
   }
 
+  /// Change l'image de profil
   Future<void> _changeProfileImage() async {
     String fileName =
         'profile_images/${DateTime.now().millisecondsSinceEpoch}.jpg';
-    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _profileImage = pickedImage;
-      });
-    }
+    final pickedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
+
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDirImages = referenceRoot.child('images');
     Reference referenceImageUpload = referenceDirImages.child(fileName);
+
     try {
+      /// Télécharge l'image sélectionnée dans Firebase Storage.
       await referenceImageUpload.putFile(File(pickedImage.path));
-      pictureUrl = await referenceImageUpload.getDownloadURL();
-    } catch (error) {}
+      String newPictureUrl = await referenceImageUpload.getDownloadURL();
+
+      /// Met à jour l'URL de l'image dans Firestore pour l'utilisateur actuel.
+      if (user != null) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .update({
+          'imageUrl': newPictureUrl,
+        });
+      }
+      setState(() {
+        pictureUrl = newPictureUrl;
+      });
+    } catch (error) {
+      print('Error: $error');
+    }
   }
 
   @override
@@ -90,46 +126,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Center(
-              child: GestureDetector(
-                onTap: _changeProfileImage,
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: _profileImage != null
-                      ? FileImage(File(_profileImage!.path))
-                      : AssetImage('assets/UMLogo.png') as ImageProvider,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Center(
-              child: Text(
-                'Email : ${widget.email}',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Center(
-              child: Text(
-                'Statut : ${widget.status}',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-          ),
+          ProfilePicture(pictureUrl: pictureUrl, onTap: _changeProfileImage),
+          ProfileInfo(email: widget.email, isAdmin: _isAdmin),
           const ThemeSwitchingWidget(),
-          Center(
-            child: SignOutButton(email: widget.email),
-          ),
+          ProfileActions(email: widget.email),
         ],
       ),
     );

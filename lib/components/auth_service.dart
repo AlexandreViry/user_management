@@ -55,7 +55,8 @@ class AuthController extends GetxController {
       // ignore: always_specify_types
       await _firestore.collection('users').doc(user?.uid).set({
         'email': user?.email,
-        'isAdmin': 1,
+        'isAdmin': false,
+        'imageUrl': ''
       });
       
     } catch(e) {

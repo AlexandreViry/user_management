@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_management/components/auth_service.dart';
 import 'package:user_management/components/get_x_theme_controller.dart';
+import 'package:user_management/components/notification_button.dart';
 import 'package:user_management/firebase_options.dart';
 import 'package:user_management/pages/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService.init();
   Get.put(ThemeController());
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
