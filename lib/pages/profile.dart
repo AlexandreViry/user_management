@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:user_management/components/sign_out_button.dart';
@@ -25,14 +27,40 @@ class MyProfilePage extends StatefulWidget {
 class _MyProfilePageState extends State<MyProfilePage> {
   XFile? _profileImage;
   final ImagePicker _picker = ImagePicker();
+  String pictureUrl = '';
+
+  Future<void> updateProfileImageUrl(String userId, String newImageUrl) async {
+    try {
+      DocumentReference userDoc =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+
+      await userDoc.update({
+        'imageUrl': newImageUrl,
+      });
+
+      print('Picture URL updated');
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   Future<void> _changeProfileImage() async {
+    String fileName =
+        'profile_images/${DateTime.now().millisecondsSinceEpoch}.jpg';
     final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage != null) {
       setState(() {
         _profileImage = pickedImage;
       });
     }
+    if (pickedImage == null) return;
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImages = referenceRoot.child('images');
+    Reference referenceImageUpload = referenceDirImages.child(fileName);
+    try {
+      await referenceImageUpload.putFile(File(pickedImage.path));
+      pictureUrl = await referenceImageUpload.getDownloadURL();
+    } catch (error) {}
   }
 
   @override
@@ -71,7 +99,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   radius: 50,
                   backgroundImage: _profileImage != null
                       ? FileImage(File(_profileImage!.path))
-                      : AssetImage('assets/default_profile.png') as ImageProvider,
+                      : AssetImage('assets/UMLogo.png') as ImageProvider,
                 ),
               ),
             ),
