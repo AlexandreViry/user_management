@@ -49,7 +49,8 @@ class AuthController extends GetxController {
   /// création de compte firebase
   Future<void> register(String email, String password) async {
     try {
-      final UserCredential userCredential = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      final UserCredential userCredential = await auth
+          .createUserWithEmailAndPassword(email: email, password: password);
       final User? user = userCredential.user;
 
       // ignore: always_specify_types
@@ -57,9 +58,10 @@ class AuthController extends GetxController {
         'email': user?.email,
         'isAdmin': 1,
       });
-      
-    } catch(e) {
-      Get.snackbar('About User',  'User message',
+    } catch (e) {
+      Get.snackbar(
+        'About User',
+        'User message',
         backgroundColor: Colors.redAccent,
         snackPosition: SnackPosition.BOTTOM,
         titleText: const Text(
@@ -67,7 +69,7 @@ class AuthController extends GetxController {
           style: TextStyle(
             color: Colors.white,
           ),
-         ),
+        ),
         messageText: Text(
           e.toString(),
           style: const TextStyle(
