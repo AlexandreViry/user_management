@@ -9,7 +9,7 @@ import 'package:user_management/components/profile_info.dart';
 import 'package:user_management/components/profile_picture.dart';
 import 'package:user_management/components/theme_switching.dart';
 
-/// Page de profil principale
+/// Page de profile principale
 class MyProfilePage extends StatefulWidget {
   const MyProfilePage({required this.email, super.key});
 
@@ -17,7 +17,7 @@ class MyProfilePage extends StatefulWidget {
   final String email;
 
   /// Titre de la page
-  final String title = 'Page Profil';
+  final String title = 'Page Profile';
 
   @override
   State<MyProfilePage> createState() => _MyProfilePageState();
