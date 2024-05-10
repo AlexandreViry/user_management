@@ -6,14 +6,16 @@ import 'package:user_management/components/theme_switching.dart';
 
 void main() {
   setUpAll(() {
-    Get.testMode = true; // Enable GetX test mode
-    Get.put(
-        ThemeController()); // Put an instance of ThemeController into the GetX dependency system
+    // Active le mode test pour GetX
+    Get.testMode = true;
+    // Instancie un ThemeController (pour la gestion du thème)
+    Get.put(ThemeController());
   });
 
+  // Test vérifiant si le Widget de bascule de thème fonctionne correctement
   testWidgets('ThemeSwitchingWidget toggles theme correctly',
       (WidgetTester tester) async {
-    // Build our widget and trigger a frame.
+    // Construit le widget et déclenche un rendu.
     await tester.pumpWidget(
       const GetMaterialApp(
         home: Scaffold(
@@ -22,17 +24,21 @@ void main() {
       ),
     );
 
-    // Initial state should be light theme
+    // Vérifie si le texte "Dark Mode" est présent
     expect(find.text('Dark Mode'), findsOneWidget);
+    // Vérifie si l'icône ensoleillée est présente
     expect(find.byIcon(Icons.sunny), findsOneWidget);
 
-    // Simulate tapping the switch
+    // Simule le tap sur la bascule de thème
     await tester.tap(find.byType(SwitchListTile));
-    await tester.pumpAndSettle(); // Pump to settle the animation
+    // Attend que l'animation soit terminée
+    await tester.pumpAndSettle();
 
-    // After tapping, the theme should toggle to dark theme
+    // Récupère l'instance du ThemeController
     final ThemeController themeController = Get.find<ThemeController>();
+    // Vérifie si le thème actuel est sombre
     expect(themeController.themeData.value.brightness, Brightness.dark);
+    // Vérifie si l'icône de mode sombre est présente
     expect(find.byIcon(Icons.dark_mode), findsOneWidget);
   });
 }

@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage>
     _controller.dispose();
     super.dispose();
   }
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
@@ -55,34 +56,41 @@ class _LoginPageState extends State<LoginPage>
                 SizedBox(height: h * 0.01),
                 const H2(h2: 'Connectes toi à ton compte'),
                 SizedBox(height: h * 0.03),
-                InputBoxText(emailController: emailController, textInput: 'email'),
+                InputBoxText(
+                    emailController: emailController, textInput: 'email'),
                 const SizedBox(height: 20),
                 InputHideBoxText(passwordController: passwordController),
                 const SizedBox(height: 20),
               ],
             ),
           ),
-          SizedBox(height: h * 0.03,),
-          ButtonLogin(emailController: emailController, passwordController: passwordController),
+          SizedBox(
+            height: h * 0.03,
+          ),
+          ButtonLogin(
+              emailController: emailController,
+              passwordController: passwordController),
           SizedBox(height: h * 0.02),
           RichText(
+            key: const Key('noAccountText'),
             text: TextSpan(
               text: "Je n'ai pas de compte:",
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 14,
               ),
-            children: <InlineSpan>[
-              TextSpan(
-              text: ' Créer',
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-              recognizer: TapGestureRecognizer()..onTap=() async =>Get.to(()=>const SignUpPage()),
-            ),
-            ],
+              children: <InlineSpan>[
+                TextSpan(
+                  text: ' Créer',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async => Get.to(() => const SignUpPage()),
+                ),
+              ],
             ),
           ),
           SizedBox(height: h * 0.02),

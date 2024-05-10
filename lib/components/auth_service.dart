@@ -9,20 +9,21 @@ import 'package:user_management/pages/splash_screen.dart';
 
 /// Class de méthodes pour firebase
 class AuthController extends GetxController {
-  /// création d'instance
+  /// création d'instanceclass AuthController extends GetxController {
   static AuthController instance = Get.find();
   late Rx<User?> _user;
 
-  /// assingnation de l'instance
   FirebaseAuth auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  bool registerCalled = false; // Flag to track register method call
+
   @override
   void onInit() {
     super.onInit();
     _showInitialSplashScreen();
   }
 
-  // Affichage du splashScreen avant de d'afficher la page de connexion
   void _showInitialSplashScreen() {
     Future.delayed(const Duration(seconds: 2), () {
       Get.off(() => SplashScreen());
@@ -46,20 +47,21 @@ class AuthController extends GetxController {
     }
   }
 
-  /// création de compte firebase
   Future<void> register(String email, String password) async {
     try {
-      final UserCredential userCredential = await auth.createUserWithEmailAndPassword(email: email, password: password);
+      registerCalled = true; // Set flag to true when register method is called
+      final UserCredential userCredential = await auth
+          .createUserWithEmailAndPassword(email: email, password: password);
       final User? user = userCredential.user;
 
-      // ignore: always_specify_types
       await _firestore.collection('users').doc(user?.uid).set({
         'email': user?.email,
         'isAdmin': false,
       });
-      
-    } catch(e) {
-      Get.snackbar('About User',  'User message',
+    } catch (e) {
+      Get.snackbar(
+        'About User',
+        'User message',
         backgroundColor: Colors.redAccent,
         snackPosition: SnackPosition.BOTTOM,
         titleText: const Text(
@@ -67,7 +69,7 @@ class AuthController extends GetxController {
           style: TextStyle(
             color: Colors.white,
           ),
-         ),
+        ),
         messageText: Text(
           e.toString(),
           style: const TextStyle(

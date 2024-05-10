@@ -3,14 +3,18 @@ import 'package:user_management/components/auth_service.dart';
 
 ///  component du bouton de login
 class ButtonLogin extends StatelessWidget {
-///  constructeur avec email et password du user
+  ///  constructeur avec email et password du user
   const ButtonLogin({
-      required this.emailController, required this.passwordController, super.key,
-    });
-    /// email du user
-    final TextEditingController emailController;
-    /// password du user
-    final TextEditingController passwordController;
+    required this.emailController,
+    required this.passwordController,
+    Key? key,
+  }) : super(key: key);
+
+  /// email du user
+  final TextEditingController emailController;
+
+  /// password du user
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +22,11 @@ class ButtonLogin extends StatelessWidget {
     final double h = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () async {
-        await AuthController.instance.login(emailController.text.trim(), passwordController.text.trim());
+        await AuthController.instance
+            .login(emailController.text.trim(), passwordController.text.trim());
       },
       child: Container(
+        key: const Key('loginButton'),
         width: w * 0.5,
         height: h * 0.08,
         decoration: BoxDecoration(
@@ -32,7 +38,7 @@ class ButtonLogin extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: const Center (
+        child: const Center(
           child: Text(
             'Sign in',
             style: TextStyle(

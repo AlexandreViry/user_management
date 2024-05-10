@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-///  component pour une input box avec du text qui gère emailController
+// Composant "InputBoxText" : Gère emailController
 class InputBoxText extends StatelessWidget {
-///  component pour une input box avec du text
+  ///  Composant pour une "InputBox" avec du texte
   const InputBoxText({
-    required this.emailController, required this.textInput, super.key,
-  });
+    required this.emailController,
+    required this.textInput,
+    Key? key,
+  }) : super(key: key);
 
-  ///  emailController  
+  ///  emailController
   final TextEditingController emailController;
-  ///  textInput  
+
+  ///  textInput
   final String textInput;
 
   @override
@@ -29,17 +32,18 @@ class InputBoxText extends StatelessWidget {
         ],
       ),
       child: TextField(
+        key: const Key('emailInput'),
         style: const TextStyle(
-          color: Colors.black,  
+          color: Colors.black,
         ),
         controller: emailController,
         decoration: InputDecoration(
           hintText: textInput,
           hintStyle: TextStyle(
-            color: Colors.grey[500],  
+            color: Colors.grey[500],
           ),
-          prefixIcon: const Icon(Icons.email, color:  Color.fromARGB(255, 2, 45, 88)),
-          
+          prefixIcon:
+              const Icon(Icons.email, color: Color.fromARGB(255, 2, 45, 88)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(
@@ -55,7 +59,6 @@ class InputBoxText extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-        
         ),
       ),
     );

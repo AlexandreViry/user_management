@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
-///  component pour une input box avec du text qui gère passwordController
+///  Composant "InputBoxText" : Gère passwordController
 class InputHideBoxText extends StatefulWidget {
-///  jolie constructeur
+  ///  jolie constructeur
   const InputHideBoxText({
-    required this.passwordController, super.key,
-  });
+    required this.passwordController,
+    Key? key,
+  }) : super(key: key);
 
   ///  jolie passwordController
   final TextEditingController passwordController;
@@ -16,7 +17,7 @@ class InputHideBoxText extends StatefulWidget {
 
 class _InputHideBoxTextState extends State<InputHideBoxText> {
   bool signShowPassword = true;
-  
+
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -33,17 +34,19 @@ class _InputHideBoxTextState extends State<InputHideBoxText> {
         ],
       ),
       child: TextField(
+        key: const Key('passwordInput'),
         style: const TextStyle(
-          color: Colors.black,  
+          color: Colors.black,
         ),
         controller: widget.passwordController,
         obscureText: signShowPassword,
         decoration: InputDecoration(
           hintText: 'mot de passe',
           hintStyle: TextStyle(
-            color: Colors.grey[500],  
+            color: Colors.grey[500],
           ),
-          prefixIcon: const Icon(Icons.password, color: Color.fromARGB(255, 2, 45, 88)),
+          prefixIcon:
+              const Icon(Icons.password, color: Color.fromARGB(255, 2, 45, 88)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(
@@ -53,7 +56,9 @@ class _InputHideBoxTextState extends State<InputHideBoxText> {
           suffixIcon: IconButton(
             icon: const Icon(Icons.remove_red_eye),
             color: const Color.fromARGB(255, 2, 45, 88),
-            onPressed: () => setState((){ signShowPassword = !signShowPassword; }),
+            onPressed: () => setState(() {
+              signShowPassword = !signShowPassword;
+            }),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
