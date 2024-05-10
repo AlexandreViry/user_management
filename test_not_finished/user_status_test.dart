@@ -1,46 +1,71 @@
-import 'package:cloud_firestore/cloud_firestore.dart'; // Import Firestore
-import 'package:firebase_core/firebase_core.dart'; // Import Firebase Core
+// ignore_for_file: subtype_of_sealed_class
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:user_management/components/user_status.dart';
-import 'package:flutter/widgets.dart';
+import 'package:mocktail/mocktail.dart';
+import '../lib/components/user_status.dart';
+
+class MockFirebaseFirestore extends Mock implements FirebaseFirestore {}
+
+class MockDocumentSnapshot extends Mock
+    implements DocumentSnapshot<Map<String, dynamic>> {}
+
+class MockDocumentReference extends Mock
+    implements DocumentReference<Map<String, dynamic>> {}
+
+class MockCollectionReference extends Mock
+    implements CollectionReference<Map<String, dynamic>> {}
 
 void main() {
-  setUpAll(() async {
-    // Initialize Firebase before using Firestore
-    WidgetsFlutterBinding.ensureInitialized(); // Initialize Flutter widgets
-    await Firebase.initializeApp(); // Initialize Firebase
+  setUpAll(() {
+    // Register fallback values for mocktail to use
+    registerFallbackValue(MockDocumentReference());
+    registerFallbackValue(MockDocumentSnapshot());
   });
 
-  group('UserStatus', () {
-    late FirebaseFirestore firestore;
-    late UserStatus userStatus;
+  group('checkAdminStatus', () {
+    late FirebaseFirestore mockFirestore;
+    late CollectionReference<Map<String, dynamic>> mockCollectionReference;
+    late DocumentReference<Map<String, dynamic>> mockDocumentReference;
+    late DocumentSnapshot<Map<String, dynamic>> mockDocumentSnapshot;
+    late userStatus statusChecker;
 
     setUp(() {
-      // Initialisez une instance de Firestore pour chaque test
-      firestore = FirebaseFirestore.instance;
-      userStatus = UserStatus(firestore);
+      mockFirestore = MockFirebaseFirestore();
+      mockCollectionReference = MockCollectionReference();
+      mockDocumentReference = MockDocumentReference();
+      mockDocumentSnapshot = MockDocumentSnapshot();
+      statusChecker = userStatus();
+
+      when(() => mockFirestore.collection('users'))
+          .thenReturn(mockCollectionReference);
+      when(() => mockCollectionReference.doc(any()))
+          .thenReturn(mockDocumentReference);
+      when(() => mockDocumentReference.get())
+          .thenAnswer((_) async => mockDocumentSnapshot);
     });
 
-    test('checkAdminStatus returns true for admin user', () async {
-      // Ajoutez un utilisateur admin à la base de données Firestore pour ce test
-      await firestore
-          .collection('users')
-          .doc('admin_uid')
-          .set({'isAdmin': true});
-
-      // Vérifiez si l'utilisateur admin est considéré comme admin
-      expect(await userStatus.checkAdminStatus('admin_uid'), isTrue);
+    test('returns true when user is an admin', () async {
+      when(() => mockDocumentSnapshot.exists).thenReturn(true);
+      when(() => mockDocumentSnapshot.data()).thenReturn({'isAdmin': true});
+      expect(await statusChecker.checkAdminStatus('00000'), true);
     });
 
-    test('checkAdminStatus returns false for non-admin user', () async {
-      // Ajoutez un utilisateur non-admin à la base de données Firestore pour ce test
-      await firestore
-          .collection('users')
-          .doc('non_admin_uid')
-          .set({'isAdmin': false});
+    test('returns false when user is not an admin', () async {
+      when(() => mockDocumentSnapshot.exists).thenReturn(true);
+      when(() => mockDocumentSnapshot.data()).thenReturn({'isAdmin': false});
+      expect(await statusChecker.checkAdminStatus('nonAd00000minUid'), false);
+    });
 
-      // Vérifiez si l'utilisateur non-admin n'est pas considéré comme admin
-      expect(await userStatus.checkAdminStatus('non_admin_uid'), isFalse);
+    test('returns false when user does not exist', () async {
+      when(() => mockDocumentSnapshot.exists).thenReturn(false);
+      expect(await statusChecker.checkAdminStatus('nonexistentUid'), false);
+    });
+
+    test('returns false and logs error on exception', () async {
+      when(() => mockDocumentReference.get())
+          .thenThrow(Exception('Firebase error'));
+      expect(await statusChecker.checkAdminStatus('errorUid'), false);
     });
   });
 }
