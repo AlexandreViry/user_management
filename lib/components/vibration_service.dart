@@ -23,8 +23,6 @@ class VibrationService {
         ], // paterne de vibration
         intensities: [128, 255, 128, 255], // intensité de la vibration
       );
-    } else {
-      print('This device does not support custom vibrations.');
     }
   }
 }
