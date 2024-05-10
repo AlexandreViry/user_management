@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage>
                 SizedBox(height: h * 0.2),
                 const H1(h1: 'Création'),
                 SizedBox(height: h * 0.01),
-                const H2(h2: 'Créer toi un compte'),
+                const H2(h2: 'Crée-toi un compte'),
                 SizedBox(height: h * 0.04),
                 InputBoxText(emailController: emailController, textInput: 'email'),
                 const SizedBox(height: 20),

@@ -1,7 +1,6 @@
-// ignore_for_file: use_named_constants
-
 import 'package:flutter/material.dart';
 import 'package:user_management/components/vibration_service.dart';
+import 'package:user_management/components/admin_button.dart';
 import 'package:user_management/pages/profile.dart';
 
 /// Page d'accueil
@@ -20,6 +19,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,29 +51,34 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(0),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
+            Text(
+              'USER_MANAGEMENT',
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            AdminButton(),
+            SizedBox(height: 20), // Spacing between the text/button and the vibration button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
                 foregroundColor: Colors.white,
                 elevation: 10.0,
-                textStyle:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                padding: EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                minimumSize:
-                    const Size(double.infinity, 50), // Full-width button
+                minimumSize: Size(double.infinity, 50), // Full-width button
               ),
               onPressed: () async {
                 await VibrationService.vibrate();
               },
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.vibration),
