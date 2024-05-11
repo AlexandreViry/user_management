@@ -4,8 +4,10 @@ import 'package:user_management/components/notification_service_web.dart';
 import 'package:user_management/components/user_status.dart';
 
 class AdminButton extends StatefulWidget {
+  const AdminButton({super.key});
+
   @override
-  _AdminButtonState createState() => _AdminButtonState();
+  State<AdminButton> createState() => _AdminButtonState();
 }
 
 class _AdminButtonState extends State<AdminButton> {
@@ -36,7 +38,7 @@ class _AdminButtonState extends State<AdminButton> {
             ? () {
                 NotificationService.pushNotification(
                   title: 'Admin Button',
-                  body: 'You are an admin, this is why you are special and can press this button'
+                  body: 'You are an admin, this is why you are special and can press this button',
                 );
               }
             : null,
