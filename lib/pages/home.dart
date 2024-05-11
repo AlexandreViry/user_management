@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-              AdminButton()
+              const AdminButton()
           ],
         ),
       ),
