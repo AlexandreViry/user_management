@@ -57,6 +57,7 @@ class AuthController extends GetxController {
       await _firestore.collection('users').doc(user?.uid).set({
         'email': user?.email,
         'isAdmin': false,
+        'imageUrl': ''
       });
     } catch (e) {
       Get.snackbar(

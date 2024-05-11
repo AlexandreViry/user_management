@@ -32,11 +32,13 @@ dependencies:
   cupertino_icons: ^1.0.6
   firebase_auth: ^4.19.1
   firebase_core: ^2.29.0
+  firebase_storage: ^11.7.5
   flutter:
     sdk: flutter
   flutter_local_notifications: ^17.1.0
   get: ^4.6.6
   google_sign_in: ^6.2.1
+  image_picker: ^1.1.1
   vibration: ^1.7.4
 
 
