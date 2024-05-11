@@ -28,15 +28,33 @@ class _AdminButtonState extends State<AdminButton> {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: _isAdmin
-          ? () {
-            NotificationService.pushNotification(title: 'Admin button', body: 'You are an admin, this is why you are special and can press this button');
-            }
-          : null,
-      child: Text('Admin only'),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: _isAdmin ? null : Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: ElevatedButton(
+        onPressed: _isAdmin
+            ? () {
+              NotificationService.pushNotification(title: 'Admin button', body: 'You are an admin, this is why you are special and can press this button');
+              }
+            : null,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: _isAdmin ? Theme.of(context).scaffoldBackgroundColor : Colors.grey[400],
+          foregroundColor: Colors.white,
+          elevation: 10,
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          minimumSize: const Size(double.infinity, 50), // Full-width button
+        ),
+        child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Icon(Icons.notifications_active),
+              SizedBox(width: 10),
+              Text('Send notification'),
+            ],
+          ),
       ),
     );
   }

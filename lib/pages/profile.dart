@@ -11,7 +11,7 @@ import 'package:user_management/components/theme_switching.dart';
 
 /// Page de profile principale
 class MyProfilePage extends StatefulWidget {
-  /// Constructeur de la page de profile
+  /// constructeur profile page
   const MyProfilePage({required this.email, super.key});
 
   /// Email de l'utilisateur
@@ -32,10 +32,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    await _checkAdminStatus();
-    await _fetchProfileImageUrl();
+    _checkAdminStatus();
+    _fetchProfileImageUrl();
   }
 
   /// Vérifie le statut administrateur
@@ -95,8 +95,9 @@ class _MyProfilePageState extends State<MyProfilePage> {
       setState(() {
         pictureUrl = newPictureUrl;
       });
-    // ignore: empty_catches
     } catch (error) {
+      // ignore: avoid_print
+      print('Error: $error');
     }
   }
 

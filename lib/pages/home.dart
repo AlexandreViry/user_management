@@ -55,36 +55,33 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'USER_MANAGEMENT',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
             AdminButton(),
-            const SizedBox(height: 20), // Spacing between the text/button and the vibration button
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurple,
-                foregroundColor: Colors.white,
-                elevation: 10,
-                textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+            const SizedBox(height: 40), // Spacing between the text/button and the vibration button
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  foregroundColor: Colors.white,
+                  elevation: 10,
+                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  minimumSize: const Size(double.infinity, 50), // Full-width button
                 ),
-                minimumSize: const Size(double.infinity, 50), // Full-width button
-              ),
-              onPressed: () async {
-                await VibrationService.vibrate();
-              },
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.vibration),
-                  SizedBox(width: 10),
-                  Text('Vibrate Phone'),
-                ],
+                onPressed: () async {
+                  await VibrationService.vibrate();
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.vibration),
+                    SizedBox(width: 10),
+                    Text('Vibrate Phone'),
+                  ],
+                ),
               ),
             ),
           ],
