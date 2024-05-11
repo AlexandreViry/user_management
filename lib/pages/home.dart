@@ -19,7 +19,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +55,9 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             AdminButton(),
-            const SizedBox(height: 40), // Spacing between the text/button and the vibration button
+            const SizedBox(
+                height:
+                    40), // Spacing between the text/button and the vibration button
             Padding(
               padding: const EdgeInsets.all(8),
               child: ElevatedButton(
@@ -64,15 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   foregroundColor: Colors.white,
                   elevation: 10,
-                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  textStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  minimumSize: const Size(double.infinity, 50), // Full-width button
+                  minimumSize:
+                      const Size(double.infinity, 50), // Full-width button
                 ),
                 onPressed: () async {
-                  await VibrationService.vibrate();
+                  await VibrationService.vibrate(context);
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
