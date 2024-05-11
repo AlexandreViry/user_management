@@ -33,6 +33,7 @@ class _InputHideBoxTextState extends State<InputHideBoxText> {
         ],
       ),
       child: TextField(
+        key: const Key('pwd-field'),
         style: const TextStyle(
           color: Colors.black,  
         ),

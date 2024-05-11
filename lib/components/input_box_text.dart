@@ -29,6 +29,7 @@ class InputBoxText extends StatelessWidget {
         ],
       ),
       child: TextField(
+        key: const Key('email-field'),
         style: const TextStyle(
           color: Colors.black,  
         ),

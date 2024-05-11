@@ -31,11 +31,14 @@ dependencies:
   cloud_firestore: ^4.16.1
   cupertino_icons: ^1.0.6
   firebase_auth: ^4.19.1
+  firebase_auth_mocks: ^0.13.0
   firebase_core: ^2.29.0
   flutter:
     sdk: flutter
   get: ^4.6.6
   google_sign_in: ^6.2.1
+  mockito: ^5.4.4
+  patrol: ^3.6.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -45,6 +48,8 @@ dev_dependencies:
   blackfoot_flutter_lint: ^2.0.0
   flutter_lints: ^3.0.0
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
 
   # The "flutter_lints" package below contains a set of recommended lints to

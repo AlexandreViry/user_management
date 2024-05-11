@@ -61,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage>
             ),
           ),
           SizedBox(height: h * 0.04,),
-          ButtonRegister(emailController: emailController, passwordController: passwordController),
+          ButtonRegister(emailController: emailController, passwordController: passwordController, key: const Key('register-btn')),
           SizedBox(height: h * 0.04),
           RichText(
             text: TextSpan(

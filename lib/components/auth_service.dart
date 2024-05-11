@@ -40,7 +40,7 @@ class AuthController extends GetxController{
       // ignore: always_specify_types
       await _firestore.collection('users').doc(user?.uid).set({
         'email': user?.email,
-        'isAdmin': 1,
+        'isAdmin': true,
       });
       
     } catch(e) {
@@ -87,9 +87,9 @@ class AuthController extends GetxController{
     }
   }
   /// logout firebase
-  Future<void> logout(String email) async {
+  Future<void> logout() async {
     await auth.signOut();
-    await signOut(email);
+    await signOut();
   }
 
   /// sign in with google and firebase
@@ -108,7 +108,7 @@ class AuthController extends GetxController{
   }
 
   /// deconnection de l'app
-  Future<void> signOut(String email) async {
+  Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
   }
 }

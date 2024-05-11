@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage>
             ),
           ),
           SizedBox(height: h * 0.03,),
-          ButtonLogin(emailController: emailController, passwordController: passwordController),
+          ButtonLogin(emailController: emailController, passwordController: passwordController, key: const Key('login-btn')),
           SizedBox(height: h * 0.02),
           RichText(
             text: TextSpan(

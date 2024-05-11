@@ -22,7 +22,7 @@ class _SignOutButtonState extends State<SignOutButton> {
     final double h = MediaQuery.of(context).size.height;
     return GestureDetector(
       onTap: () async {
-        await AuthController.instance.logout(widget.email);
+        await AuthController.instance.logout();
       },
       child: Container(
         width: w * 0.5,
