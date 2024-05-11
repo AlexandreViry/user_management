@@ -11,6 +11,7 @@ import 'package:user_management/components/theme_switching.dart';
 
 /// Page de profile principale
 class MyProfilePage extends StatefulWidget {
+  /// Constructeur de la page de profile
   const MyProfilePage({required this.email, super.key});
 
   /// Email de l'utilisateur
@@ -31,17 +32,17 @@ class _MyProfilePageState extends State<MyProfilePage> {
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    _checkAdminStatus();
-    _fetchProfileImageUrl();
+    await _checkAdminStatus();
+    await _fetchProfileImageUrl();
   }
 
   /// Vérifie le statut administrateur
   Future<void> _checkAdminStatus() async {
     if (user == null) return;
 
-    var userDoc = await FirebaseFirestore.instance
+    final DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
         .collection('users')
         .doc(user!.uid)
         .get();
@@ -54,7 +55,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
   Future<void> _fetchProfileImageUrl() async {
     if (user == null) return;
 
-    var userDoc = await FirebaseFirestore.instance
+    final DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
         .collection('users')
         .doc(user!.uid)
         .get();
@@ -67,35 +68,35 @@ class _MyProfilePageState extends State<MyProfilePage> {
 
   /// Change l'image de profil
   Future<void> _changeProfileImage() async {
-    String fileName =
+    final String fileName =
         'profile_images/${DateTime.now().millisecondsSinceEpoch}.jpg';
-    final pickedImage =
+    final XFile? pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
 
-    Reference referenceRoot = FirebaseStorage.instance.ref();
-    Reference referenceDirImages = referenceRoot.child('images');
-    Reference referenceImageUpload = referenceDirImages.child(fileName);
+    final Reference referenceRoot = FirebaseStorage.instance.ref();
+    final Reference referenceDirImages = referenceRoot.child('images');
+    final Reference referenceImageUpload = referenceDirImages.child(fileName);
 
     try {
       /// Télécharge l'image sélectionnée dans Firebase Storage.
       await referenceImageUpload.putFile(File(pickedImage.path));
-      String newPictureUrl = await referenceImageUpload.getDownloadURL();
+      final String newPictureUrl = await referenceImageUpload.getDownloadURL();
 
       /// Met à jour l'URL de l'image dans Firestore pour l'utilisateur actuel.
       if (user != null) {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(user!.uid)
-            .update({
+            .update(<Object, Object?>{
           'imageUrl': newPictureUrl,
         });
       }
       setState(() {
         pictureUrl = newPictureUrl;
       });
+    // ignore: empty_catches
     } catch (error) {
-      print('Error: $error');
     }
   }
 

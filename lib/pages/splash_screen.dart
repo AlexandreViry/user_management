@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// page de splash screen
 class SplashScreen extends StatelessWidget {
+  /// jolie constructeur de splash screen
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Création de la page du splash screen
@@ -8,7 +12,7 @@ class SplashScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         decoration: const BoxDecoration(
-          color: Colors.white
+          color: Colors.white,
         ),
         child: Center(
           child: TweenAnimationBuilder<double>(
