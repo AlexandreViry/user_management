@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:user_management/components/input_box_text.dart';
 
 void main() {
-  testWidgets('InputBoxText widget test', (WidgetTester tester) async {
+  // Teste le widget InputBoxText pour s'assurer qu'il est présent
+  testWidgets('Test du widget InputBoxText', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -17,10 +18,12 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    // Vérifie que le widget InputBoxText est bien présent
     expect(find.byType(InputBoxText), findsOneWidget);
   });
 
-  testWidgets('InputBoxText should have prefix icon',
+  // Teste si InputBoxText contient une icône préfixée
+  testWidgets('InputBoxText devrait avoir une icône préfixée',
       (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
@@ -35,13 +38,15 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    // Vérifie que l'icône d'email est présente
     expect(find.byIcon(Icons.email), findsOneWidget);
   });
 
-  testWidgets('InputBoxText should have initial text value',
+  // Teste si InputBoxText contient une valeur de texte initiale
+  testWidgets('InputBoxText devrait avoir une valeur de texte initiale',
       (WidgetTester tester) async {
     final TextEditingController controller =
-        TextEditingController(text: 'Initial Text');
+        TextEditingController(text: 'Texte initial');
 
     await tester.pumpWidget(
       MaterialApp(
@@ -56,10 +61,13 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(controller.text, 'Initial Text');
+    // Vérifie que la valeur initiale du contrôleur est correcte
+    expect(controller.text, 'Texte initial');
   });
 
-  testWidgets('Entering text into InputBoxText should update controller value',
+  // Teste la mise à jour de la valeur du contrôleur lors de la saisie de texte
+  testWidgets(
+      'Entrer du texte dans InputBoxText devrait mettre à jour la valeur du contrôleur',
       (WidgetTester tester) async {
     final TextEditingController controller = TextEditingController();
 
@@ -76,8 +84,10 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    await tester.enterText(find.byType(TextField), 'New Text');
+    // Simule l'entrée de texte
+    await tester.enterText(find.byType(TextField), 'Nouveau texte');
 
-    expect(controller.text, 'New Text');
+    // Vérifie que le texte du contrôleur a été mis à jour
+    expect(controller.text, 'Nouveau texte');
   });
 }

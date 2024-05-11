@@ -3,25 +3,26 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:user_management/pages/login.dart';
 
 void main() {
-  testWidgets('Login Page UI Test', (WidgetTester tester) async {
-    // Build the LoginPage widget
+  testWidgets("Test de l'interface utilisateur de la page de connexion",
+      (WidgetTester tester) async {
+    // Construit le widget LoginPage
     await tester.pumpWidget(const MaterialApp(
       home: LoginPage(),
     ));
 
-    // Test if the main title "Connection" is present
+    // Teste si le titre principal "Connection" est présent
     expect(find.text('Connection'), findsOneWidget);
 
-    // Test if the email input field is present
+    // Teste si le champ de saisie de l'email est présent
     expect(find.byKey(const Key('emailInput')), findsOneWidget);
 
-    // Test if the password input field is present
+    // Teste si le champ de saisie du mot de passe est présent
     expect(find.byKey(const Key('passwordInput')), findsOneWidget);
 
-    // Test if the login button is present
+    // Teste si le bouton de connexion est présent
     expect(find.byKey(const Key('loginButton')), findsOneWidget);
 
-    // Test if the "Je n'ai pas de compte" text is present
+    // Teste si le texte "Je n'ai pas de compte" est présent
     expect(find.byKey(const Key('noAccountText')), findsOneWidget);
   });
 }
