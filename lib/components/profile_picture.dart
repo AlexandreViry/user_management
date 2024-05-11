@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// Check if a profile picture exist and will display it
 class ProfilePicture extends StatelessWidget {
+  /// Constructor with parameters
+  const ProfilePicture({required this.onTap, super.key, this.pictureUrl});
+  /// This is the url of the image in firebase
   final String? pictureUrl;
+  /// Call back when we click on the button
   final VoidCallback onTap;
-
-  const ProfilePicture({Key? key, this.pictureUrl, required this.onTap})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             AdminButton(),
             const SizedBox(
                 height:
-                    40), // Spacing between the text/button and the vibration button
+                    40,), // Spacing between the text/button and the vibration button
             Padding(
               padding: const EdgeInsets.all(8),
               child: ElevatedButton(
@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   foregroundColor: Colors.white,
                   elevation: 10,
                   textStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: 16, fontWeight: FontWeight.bold,),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),

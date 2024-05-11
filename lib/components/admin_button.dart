@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:user_management/components/user_status.dart';
 import 'package:user_management/components/notification_button.dart';
+import 'package:user_management/components/user_status.dart';
 
 class AdminButton extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _AdminButtonState extends State<AdminButton> {
   Future<void> _checkAdminStatus() async {
     User? user = FirebaseAuth.instance.currentUser;
 
-    bool isAdmin = await userStatus().checkAdminStatus(user!.uid);
+    bool isAdmin = await UserStatus().checkAdminStatus(user!.uid);
     setState(() {
       _isAdmin = isAdmin;
     });

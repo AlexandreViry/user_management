@@ -1,15 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
-class userStatus {
+/// This gives us functions to return the status of a user
+class UserStatus {
+  /// This function will return the status of the user 
   Future<bool> checkAdminStatus(String uid) async {
     try {
-      var userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+      final DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
       if (userDoc.exists) {
-        var isAdmin = userDoc['isAdmin'] ?? false;
+        final bool isAdmin = userDoc['isAdmin'] ?? false;
         return isAdmin;
       }
     } catch (e) {
-      print('Erreur lors de la récupération du statut d\'administrateur : $e');
+      if (kDebugMode) {
+        print("Erreur lors de la récupération du statut d'administrateur : $e");
+      }
     }
     return false;
   }
