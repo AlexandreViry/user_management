@@ -32,20 +32,21 @@ class _MyProfilePageState extends State<MyProfilePage> {
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    _checkAdminStatus();
-    _fetchProfileImageUrl();
+    await _checkAdminStatus();
+    await _fetchProfileImageUrl();
   }
 
   /// Vérifie le statut administrateur
   Future<void> _checkAdminStatus() async {
     if (user == null) return;
 
-    final DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user!.uid)
-        .get();
+    final DocumentSnapshot<Map<String, dynamic>> userDoc =
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .get();
     setState(() {
       _isAdmin = userDoc.exists && (userDoc.data()?['isAdmin'] == true);
     });
@@ -55,10 +56,11 @@ class _MyProfilePageState extends State<MyProfilePage> {
   Future<void> _fetchProfileImageUrl() async {
     if (user == null) return;
 
-    final DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(user!.uid)
-        .get();
+    final DocumentSnapshot<Map<String, dynamic>> userDoc =
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .get();
     if (userDoc.exists) {
       setState(() {
         pictureUrl = userDoc.data()?['imageUrl'] as String?;

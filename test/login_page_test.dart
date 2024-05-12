@@ -6,9 +6,11 @@ void main() {
   testWidgets("Test de l'interface utilisateur de la page de connexion",
       (WidgetTester tester) async {
     // Build the LoginPage widget
-    await tester.pumpWidget(const MaterialApp(
-      home: LoginPage(),
-    ));
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: LoginPage(),
+      ),
+    );
 
     // Verify the presence of the main title "Connection"
     expect(find.byKey(const Key('ConnexionTitle')), findsOneWidget);

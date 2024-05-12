@@ -44,7 +44,7 @@ void main() {
 
   /// Teste le basculement de la visibilité du mot de passe en cliquant sur l'icône de l'œil
   testWidgets(
-      'InputHideBoxText devrait basculer la visibilité du mot de passe en cliquant sur l\'icône de l\'œil',
+      "InputHideBoxText devrait basculer la visibilité du mot de passe en cliquant sur l'icône de l'œil",
       (WidgetTester tester) async {
     final TextEditingController controller = TextEditingController();
 
@@ -62,7 +62,9 @@ void main() {
 
     /// Vérifie que le texte est initialement masqué
     expect(
-        tester.widget<TextField>(find.byType(TextField)).obscureText, isTrue);
+      tester.widget<TextField>(find.byType(TextField)).obscureText,
+      isTrue,
+    );
 
     /// Simule un tap sur l'icône de l'œil pour basculer la visibilité
     await tester.tap(find.byIcon(Icons.remove_red_eye));
@@ -70,7 +72,9 @@ void main() {
 
     /// Vérifie que le texte n'est plus masqué
     expect(
-        tester.widget<TextField>(find.byType(TextField)).obscureText, isFalse);
+      tester.widget<TextField>(find.byType(TextField)).obscureText,
+      isFalse,
+    );
   });
 
   /// Teste la mise à jour de la valeur du contrôleur lors de la saisie de texte

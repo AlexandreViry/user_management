@@ -8,10 +8,16 @@ import 'package:user_management/pages/profile.dart';
 
 void main() {
   setUpAll(() {
-    Get.testMode = true; /// Active le mode test de GetX
+    Get.testMode = true;
+
+    /// Active le mode test de GetX
     Get.put(
-        ThemeController()); /// Initialise ThemeController pour l'environnement de test.
+      ThemeController(),
+    );
+
+    /// Initialise ThemeController pour l'environnement de test.
   });
+
   /// Widget auxiliaire pour encapsuler la page avec le MaterialApp nécessaire
   Widget createMyProfilePage(String email) => MaterialApp(
         home: MyProfilePage(email: email),
@@ -22,7 +28,7 @@ void main() {
     testWidgets(
         'Vérifie si tous les widgets sont présents et correctement configurés',
         (WidgetTester tester) async {
-      const email = 'test@example.com';
+      const String email = 'test@example.com';
       await tester.pumpWidget(createMyProfilePage(email));
 
       /// Vérifie l'AppBar et ses propriétés
@@ -33,9 +39,11 @@ void main() {
       /// Vérifie le contenu principal
       final Text moiText = tester.widget(find.text('Moi'));
       expect(
-          moiText.style?.color,
-          equals(
-              Theme.of(tester.element(find.text('Moi'))).colorScheme.primary));
+        moiText.style?.color,
+        equals(
+          Theme.of(tester.element(find.text('Moi'))).colorScheme.primary,
+        ),
+      );
 
       /// Vérifie la présence de ThemeSwitchingWidget et SignOutButton
       expect(find.byType(ThemeSwitchingWidget), findsOneWidget);
