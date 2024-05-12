@@ -13,7 +13,7 @@ class NotificationService {
   }
 
   /// Sends a notification to the user 
-  static pushNotification({required String title, required String body}) {
+  static void pushNotification({required String title, required String body}) {
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
     const AndroidNotificationDetails androidDetails = AndroidNotificationDetails('channel_1', 'My channel', importance: Importance.max, priority: Priority.high);
     const NotificationDetails notificationDetails = NotificationDetails(android: androidDetails, iOS: iosDetails);

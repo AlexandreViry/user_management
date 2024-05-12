@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AdminButton(),
+            const AdminButton(),
             const SizedBox(
                 height:
                     40,), // Spacing between the text/button and the vibration button

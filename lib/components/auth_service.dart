@@ -25,10 +25,8 @@ class AuthController extends GetxController {
   // Affichage du splashScreen avant de d'afficher la page de connexion
   void _showInitialSplashScreen() {
     Future.delayed(const Duration(seconds: 2), () {
-      Get.off(() => SplashScreen());
-      Future.delayed(const Duration(seconds: 2), () {
-        _checkUserLoggedIn();
-      });
+      Get.off(() => const SplashScreen());
+      Future.delayed(const Duration(seconds: 2), _checkUserLoggedIn);
     });
   }
 
@@ -57,7 +55,7 @@ class AuthController extends GetxController {
       await _firestore.collection('users').doc(user?.uid).set({
         'email': user?.email,
         'isAdmin': false,
-        'imageUrl': ''
+        'imageUrl': '',
       });
     } catch (e) {
       Get.snackbar(
