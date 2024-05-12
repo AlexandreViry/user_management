@@ -8,6 +8,7 @@ void main() {
   setUpAll(() {
     /// Active le mode test pour GetX
     Get.testMode = true;
+
     /// Instancie un ThemeController (pour la gestion du thème)
     Get.put(ThemeController());
   });
@@ -26,18 +27,22 @@ void main() {
 
     /// Vérifie si le texte "Dark Mode" est présent
     expect(find.text('Dark Mode'), findsOneWidget);
+
     /// Vérifie si l'icône ensoleillée est présente
     expect(find.byIcon(Icons.sunny), findsOneWidget);
 
     /// Simule le tap sur la bascule de thème
     await tester.tap(find.byType(SwitchListTile));
+
     /// Attend que l'animation soit terminée
     await tester.pumpAndSettle();
 
     /// Récupère l'instance du ThemeController
     final ThemeController themeController = Get.find<ThemeController>();
+
     /// Vérifie si le thème actuel est sombre
     expect(themeController.themeData.value.brightness, Brightness.dark);
+
     /// Vérifie si l'icône de mode sombre est présente
     expect(find.byIcon(Icons.dark_mode), findsOneWidget);
   });

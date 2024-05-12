@@ -6,27 +6,31 @@ import 'package:user_management/pages/home.dart';
 import './mock.dart';
 
 void main() {
-  // TestWidgetsFlutterBinding.ensureInitialized(); Gets called in setupFirebaseAuthMocks()
+  /// Configure les mocks d'authentification Firebase
   setupFirebaseAuthMocks();
 
   setUpAll(() async {
+    /// Initialise Firebase
     await Firebase.initializeApp();
   });
 
-  testWidgets('MyHomePage has a title and message button',
+  testWidgets('MyHomePage a un titre et un bouton de message',
       (WidgetTester tester) async {
+    /// Charge le widget MaterialApp avec MyHomePage
     await tester.pumpWidget(
       const MaterialApp(home: MyHomePage(email: 'test@example.com')),
     );
 
-    // Verify the title is displayed
+    /// Vérifie que le titre est affiché
     expect(find.text('User Management'), findsOneWidget);
 
-    // Verify the vibrate button is present
+    /// Vérifie que le bouton de vibration est présent
     expect(find.text('Vibrate Phone'), findsOneWidget);
 
-    // Optionally, trigger the button and check interactions
+    /// Déclenche le bouton optionnellement et vérifie les interactions
     await tester.tap(find.byKey(const Key('vibrateButton')));
-    await tester.pump(); // Pump if there are animations or delayed responses
+    await tester.pump();
+
+    /// Anime si des réponses retardées ou des animations sont présentes
   });
 }
