@@ -43,7 +43,7 @@ class _AdminButtonState extends State<AdminButton> {
               }
             : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: _isAdmin ? Theme.of(context).colorScheme.primary : Colors.grey[400],
+          backgroundColor: _isAdmin ? Theme.of(context).scaffoldBackgroundColor : Colors.grey[400],
           foregroundColor: Colors.white,
           elevation: 10,
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
