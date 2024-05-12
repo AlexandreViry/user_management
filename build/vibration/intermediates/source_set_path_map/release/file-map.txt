@@ -1,0 +1,13 @@
+com.benjaminabel.vibration-jetified-annotation-experimental-1.1.0-0 C:\Users\Sarwe\.gradle\caches\transforms-3\257e0bb88528f5fc66bfd853728809aa\transformed\jetified-annotation-experimental-1.1.0\res
+com.benjaminabel.vibration-jetified-window-1.0.0-beta04-1 C:\Users\Sarwe\.gradle\caches\transforms-3\6582e67aea0be70979c64a0bfb01e347\transformed\jetified-window-1.0.0-beta04\res
+com.benjaminabel.vibration-core-1.6.0-2 C:\Users\Sarwe\.gradle\caches\transforms-3\974b4f2252348b5ef43741b27d416a49\transformed\core-1.6.0\res
+com.benjaminabel.vibration-jetified-window-java-1.0.0-beta04-3 C:\Users\Sarwe\.gradle\caches\transforms-3\9b0dd0bee9a81680af20f56797c52ab1\transformed\jetified-window-java-1.0.0-beta04\res
+com.benjaminabel.vibration-main-4 C:\Users\Sarwe\AppData\Local\Pub\Cache\hosted\pub.dev\vibration-1.8.4\android\src\main\res
+com.benjaminabel.vibration-release-5 C:\Users\Sarwe\AppData\Local\Pub\Cache\hosted\pub.dev\vibration-1.8.4\android\src\release\res
+com.benjaminabel.vibration-packaged_res-6 D:\user_management\build\device_info_plus\intermediates\packaged_res\release
+com.benjaminabel.vibration-pngs-7 D:\user_management\build\vibration\generated\res\pngs\release
+com.benjaminabel.vibration-resValues-8 D:\user_management\build\vibration\generated\res\resValues\release
+com.benjaminabel.vibration-rs-9 D:\user_management\build\vibration\generated\res\rs\release
+com.benjaminabel.vibration-mergeReleaseResources-10 D:\user_management\build\vibration\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.benjaminabel.vibration-mergeReleaseResources-11 D:\user_management\build\vibration\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.benjaminabel.vibration-merged_res-12 D:\user_management\build\vibration\intermediates\merged_res\release
