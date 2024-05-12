@@ -39,6 +39,7 @@ dependencies:
   get: ^4.6.6
   google_sign_in: ^6.2.1
   image_picker: ^1.1.1
+  universal_html: ^2.2.4
   vibration: ^1.7.4
 
 
