@@ -1,32 +1,36 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:universal_html/html.dart' as html;
 
+/// Notification for web and mobile
 class NotificationService {
-  static final _notification = FlutterLocalNotificationsPlugin();
+  static final FlutterLocalNotificationsPlugin _notification = FlutterLocalNotificationsPlugin();
 
-  static init() {
+  /// Constructor
+  static void init() {
+    // ignore: discarded_futures
     _notification.initialize(const InitializationSettings(
         android: AndroidInitializationSettings('logo'),
-        iOS: DarwinInitializationSettings()));
+        iOS: DarwinInitializationSettings(),),);
   }
-
-  static pushNotification({required String title, required String body}) async {
+  /// when called will push the notification to the device
+  static Future<void> pushNotification({required String title, required String body}) async {
     if (html.Notification.permission == 'granted') {
       html.Notification(title, body: body);
     } else if (html.Notification.permission != 'denied') {
-      html.Notification.requestPermission().then((permission) {
+      // ignore: unawaited_futures
+      html.Notification.requestPermission().then((String permission) {
         if (permission == 'granted') {
           html.Notification(title, body: body);
         }
       });
     } else {
-      var iosDetails = const DarwinNotificationDetails();
-      var androidDetails = const AndroidNotificationDetails(
+      const DarwinNotificationDetails iosDetails = DarwinNotificationDetails();
+      const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
           'channel_1', 'My channel',
-          importance: Importance.max, priority: Priority.high);
-      var notificationDetails =
+          importance: Importance.max, priority: Priority.high,);
+      const NotificationDetails notificationDetails =
           NotificationDetails(android: androidDetails, iOS: iosDetails);
-      _notification.show(20, title, body, notificationDetails);
+      await _notification.show(20, title, body, notificationDetails);
     }
   }
 }
