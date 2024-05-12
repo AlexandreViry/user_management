@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage>
     _controller.dispose();
     super.dispose();
   }
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
@@ -51,38 +52,53 @@ class _LoginPageState extends State<LoginPage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: h * 0.2),
-                const H1(h1: 'Connection'),
+                const H1(key: Key('ConnexionTitle'), h1: 'Connection'),
                 SizedBox(height: h * 0.01),
-                const H2(h2: 'Connectes toi à ton compte'),
+                const H2(
+                    key: Key('ConnexionToAccountTitle'),
+                    h2: 'Connectes toi à ton compte'),
                 SizedBox(height: h * 0.03),
-                InputBoxText(emailController: emailController, textInput: 'email'),
+                InputBoxText(
+                    key: const Key('emailInput'),
+                    emailController: emailController,
+                    textInput: 'email'),
                 const SizedBox(height: 20),
-                InputHideBoxText(passwordController: passwordController),
+                InputHideBoxText(
+                    key: const Key('passwordInput'),
+                    passwordController: passwordController),
                 const SizedBox(height: 20),
               ],
             ),
           ),
-          SizedBox(height: h * 0.03,),
-          ButtonLogin(emailController: emailController, passwordController: passwordController),
+          SizedBox(
+            height: h * 0.03,
+          ),
+          ButtonLogin(
+            key: const Key('loginButton'),
+            emailController: emailController,
+            passwordController: passwordController,
+          ),
           SizedBox(height: h * 0.02),
           RichText(
+            key: const Key('noAccountText'),
             text: TextSpan(
               text: "Je n'ai pas de compte:",
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 14,
               ),
-            children: <InlineSpan>[
-              TextSpan(
-              text: ' Créer',
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-              recognizer: TapGestureRecognizer()..onTap=() async =>Get.to(()=>const SignUpPage()),
-            ),
-            ],
+              children: <InlineSpan>[
+                TextSpan(
+                  text: ' Créer',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () async => Get.to(() => const SignUpPage()),
+                ),
+              ],
             ),
           ),
           SizedBox(height: h * 0.02),
