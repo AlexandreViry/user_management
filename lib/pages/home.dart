@@ -54,25 +54,27 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            AdminButton(),
+            const AdminButton(),
             const SizedBox(
-                height:
-                    40), // Spacing between the text/button and the vibration button
+              height: 40,
+            ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: ElevatedButton(
+                key: const Key('vibrateButton'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   foregroundColor: Colors.white,
                   elevation: 10,
                   textStyle: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  minimumSize:
-                      const Size(double.infinity, 50), // Full-width button
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 onPressed: () async {
                   await VibrationService.vibrate(context);
