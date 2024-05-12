@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
+///
 class ProfilePicture extends StatelessWidget {
-  final String? pictureUrl;
-  final VoidCallback onTap;
+  ///
+  const ProfilePicture({required this.onTap, super.key, this.pictureUrl});
 
-  const ProfilePicture({Key? key, this.pictureUrl, required this.onTap})
-      : super(key: key);
+  ///
+  final String? pictureUrl;
+
+  ///
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
