@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:user_management/components/notification_button.dart';
 import 'package:user_management/components/user_status.dart';
 
+/// Creates a button that send a notifiction if the user is admin
 class AdminButton extends StatefulWidget {
+  /// Key constructor
+  const AdminButton({super.key});
+
   @override
-  _AdminButtonState createState() => _AdminButtonState();
+  State<AdminButton> createState() => _AdminButtonState();
 }
 
 class _AdminButtonState extends State<AdminButton> {
@@ -18,9 +22,9 @@ class _AdminButtonState extends State<AdminButton> {
   }
 
   Future<void> _checkAdminStatus() async {
-    User? user = FirebaseAuth.instance.currentUser;
+    final User? user = FirebaseAuth.instance.currentUser;
 
-    bool isAdmin = await UserStatus().checkAdminStatus(user!.uid);
+    final bool isAdmin = await UserStatus().checkAdminStatus(user!.uid);
     setState(() {
       _isAdmin = isAdmin;
     });
