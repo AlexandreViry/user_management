@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:user_management/components/notification_button.dart';
+import 'package:user_management/components/notification_service_web.dart';
 import 'package:user_management/components/user_status.dart';
 
 /// Creates a button that send a notifiction if the user is admin
@@ -37,11 +37,14 @@ class _AdminButtonState extends State<AdminButton> {
       child: ElevatedButton(
         onPressed: _isAdmin
             ? () {
-              NotificationService.pushNotification(title: 'Admin button', body: 'You are an admin, this is why you are special and can press this button');
+                NotificationService.pushNotification(
+                  title: 'Admin Button',
+                  body: 'You are an admin, this is why you are special and can press this button',
+                );
               }
             : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: _isAdmin ? Theme.of(context).scaffoldBackgroundColor : Colors.grey[400],
+          backgroundColor: _isAdmin ? Theme.of(context).colorScheme.primary : Colors.grey[400],
           foregroundColor: Colors.white,
           elevation: 10,
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -49,16 +52,16 @@ class _AdminButtonState extends State<AdminButton> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          minimumSize: const Size(double.infinity, 50), // Full-width button
+          minimumSize: const Size(double.infinity, 50),
         ),
         child: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(Icons.notifications_active),
-              SizedBox(width: 10),
-              Text('Send notification'),
-            ],
-          ),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(Icons.notifications_active),
+            SizedBox(width: 10),
+            Text('Send Notification'),
+          ],
+        ),
       ),
     );
   }
