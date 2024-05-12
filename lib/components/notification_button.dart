@@ -5,7 +5,7 @@ class NotificationService {
   static final FlutterLocalNotificationsPlugin _notification = FlutterLocalNotificationsPlugin();
 
   /// Called by main, it initialize the notifications
-  static init() {
+  static void init() {
     _notification.initialize(const InitializationSettings(
       android: AndroidInitializationSettings('logo'),
       iOS: DarwinInitializationSettings(),
