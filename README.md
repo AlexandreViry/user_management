@@ -79,3 +79,20 @@ Cette application vise non seulement à satisfaire les exigences techniques du p
 
 ## 📉📈 Déployer localement
 
+Cloner le projet depuis GitHub :
+```bash
+git clone https://github.com/valoup917/user_management.git
+```
+Accéder au répertoire du projet :
+```bash
+cd user_management
+```
+Installer les dépendances du projet :
+
+```bash
+flutter pub get
+```
+Lancer le projet sur le device de votre choix:
+```bash
+flutter run
+```
