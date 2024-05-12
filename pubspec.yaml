@@ -47,9 +47,12 @@ dependencies:
 
 dev_dependencies:
   blackfoot_flutter_lint: ^2.0.0
+  fake_cloud_firestore: ^2.5.1
+  firebase_core_platform_interface: ^5.0.0
   flutter_lints: ^3.0.0
   flutter_test:
     sdk: flutter
+  mockito: ^5.0.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

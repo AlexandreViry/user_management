@@ -32,10 +32,10 @@ class _MyProfilePageState extends State<MyProfilePage> {
   User? user = FirebaseAuth.instance.currentUser;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
-    await _checkAdminStatus();
-    await _fetchProfileImageUrl();
+    _checkAdminStatus();
+    _fetchProfileImageUrl();
   }
 
   /// Vérifie le statut administrateur

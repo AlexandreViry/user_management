@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: const EdgeInsets.all(8),
               child: ElevatedButton(
+                key: const Key('vibrateButton'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   foregroundColor: Colors.white,
