@@ -1,9 +1,13 @@
+// ignore_for_file: discarded_futures
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_management/components/notification_button.dart';
 import 'package:user_management/components/user_status.dart';
 
+/// Classe pour un bouton d'administration.
 class AdminButton extends StatefulWidget {
+  /// Constructeur de AdminButton
   const AdminButton({super.key});
 
   @override
@@ -22,7 +26,7 @@ class _AdminButtonState extends State<AdminButton> {
   Future<void> _checkAdminStatus() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
-      final bool isAdmin = await userStatus().checkAdminStatus(user.uid);
+      final bool isAdmin = await UserStatus().checkAdminStatus(user.uid);
       setState(() {
         _isAdmin = isAdmin;
       });
@@ -38,12 +42,15 @@ class _AdminButtonState extends State<AdminButton> {
             ? () {
                 NotificationService.pushNotification(
                   title: 'Admin Button',
-                  body: 'You are an admin, this is why you are special and can press this button',
+                  body:
+                      'You are an admin, this is why you are special and can press this button',
                 );
               }
             : null,
         style: ElevatedButton.styleFrom(
-          backgroundColor: _isAdmin ? Theme.of(context).scaffoldBackgroundColor : Colors.grey[400],
+          backgroundColor: _isAdmin
+              ? Theme.of(context).scaffoldBackgroundColor
+              : Colors.grey[400],
           foregroundColor: Colors.white,
           elevation: 10,
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),

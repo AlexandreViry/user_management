@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:user_management/components/sign_out_button.dart';
 
+/// Classe pour gérer les actions sur la page de profil.
 class ProfileActions extends StatelessWidget {
-  final String email;
+  /// Constructeur de ProfileActions qui nécessite un email.
+  const ProfileActions({required this.email, super.key});
 
-  const ProfileActions({Key? key, required this.email}) : super(key: key);
+  /// Email de l'utilisateur utilisé pour les actions de profil.
+  final String email;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        children: [
+        children: <Widget>[
           SignOutButton(email: email),
         ],
       ),
