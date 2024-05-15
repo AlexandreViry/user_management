@@ -7,6 +7,16 @@
   Une application flutter qui gère des permissions d'utilisateurs
 </p>
 
+</br>
+
+<div align="center">
+    
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1efc1bc3-150d-458d-8efc-fba97d586db3/deploy-status)](https://app.netlify.com/sites/user-management-flutter/deploys)
+
+[![Codemagic build status](https://api.codemagic.io/apps/6640f396b256ee08556aadc4/6640f396b256ee08556aadc3/status_badge.svg)](https://codemagic.io/apps/6640f396b256ee08556aadc4/6640f396b256ee08556aadc3/latest_build)
+
+</div>
+
 ## 👨🏻‍🏫 Le sujet Epitech
 
 #### 📋 Prérequis
@@ -62,8 +72,36 @@ Cette application vise non seulement à satisfaire les exigences techniques du p
 <div align="center">
   <img alt="Flutter" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
   <img alt="Firebase" src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" />
+  <img alt="Netlify" src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" />
 </div>
 </br>
+
+<div align="center">
+    
+  cloud_firestore: ^4.16.1
+  
+  cupertino_icons: ^1.0.6
+  
+  firebase_auth: ^4.19.1
+  
+  firebase_core: ^2.29.0
+  
+  firebase_storage: ^11.7.5
+  
+  flutter_local_notifications: ^17.1.0
+  
+  get: ^4.6.6
+  
+  google_sign_in: ^6.2.1
+  
+  image_picker: ^1.1.1
+  
+  universal_html: ^2.2.4
+  
+  vibration: ^1.7.4
+
+Pour les packages utilisés rien de bien compliqué, on retrouve firbase, firestore et google pour la gestion utilisateur, cupertino pour les icons. Nous utilisons vibration pour le bouton de tous les users, flutter_local_notifications pour le bouton admin afin de créer une notifications systeme, et universal_html pour détecter si nous sommes bien sur une version web afin d'y déclencher une notification adaptée à la version web grace au service worker. Nous avons aussi utilisé GetX pour gérer la partie state management et enfin image_picker afin de pouvoir changer de photo de profil et d'accéder aux photos du user.
+</div>
 
 
 ## 🖥️ Notre solution
@@ -74,7 +112,6 @@ Cette application vise non seulement à satisfaire les exigences techniques du p
     ---
     <img alt="google sign in" title="mockup" src="./doc/ReadMe/google_login_mockup.gif" width="300">
     ---
-    <img alt="navbar" title="mockup" src="./doc/ReadMe/navbar_mockup.gif" width="300">
 </p>
 
 ## 📉📈 Déployer localement
